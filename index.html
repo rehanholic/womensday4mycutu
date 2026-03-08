@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🌻</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+overflow:hidden;
+background:#ffe066;
+font-family:'Quicksand',sans-serif;
+text-align:center;
+}
+
+/* BUTTON */
+
+#startBtn{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+padding:20px 40px;
+font-size:22px;
+border:none;
+border-radius:40px;
+background:#ffd43b;
+cursor:pointer;
+font-family:'Pacifico',cursive;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* FALLING TEXT */
+
+.falling{
+position:absolute;
+font-size:20px;
+color:#333;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+0%{transform:translateY(-50px);opacity:1}
+100%{transform:translateY(110vh);opacity:0}
+}
+
+/* FLOATING HEARTS */
+
+.heart{
+position:absolute;
+font-size:26px;
+animation:float 6s ease-in-out infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+50%{transform:translateY(-20px)}
+100%{transform:translateY(0)}
+}
+
+/* SUNFLOWER GARDEN */
+
+.garden{
+position:absolute;
+bottom:0;
+width:100%;
+display:flex;
+justify-content:center;
+gap:10px;
+pointer-events:none;
+}
+
+.flower{
+font-size:40px;
+transform:scaleY(0);
+animation:grow 2s forwards;
+}
+
+@keyframes grow{
+0%{transform:scaleY(0)}
+100%{transform:scaleY(1)}
+}
+
+/* FINAL MESSAGE */
+
+#final{
+position:absolute;
+top:35%;
+width:100%;
+font-size:40px;
+font-family:'Pacifico',cursive;
+opacity:0;
+transition:1s;
+}
+
+</style>
+</head>
+
+<body>
+
+<button id="startBtn">Click me 🌻</button>
+
+<div id="final">Happy Women’s Day to the most amazing girl.</div>
+
+<div class="garden" id="garden"></div>
+
+<script>
+
+/* COMPLIMENTS */
+
+const compliments=[
+
+"you matter my love 🌻",
+"you make the world a better place js by existing",
+"you deserve all the best things",
+"you are a bitch sometimes but a cute one so issok",
+"you’re stronger than you think",
+"you make my days better",
+"you support palestine (bare min ik)",
+"you are anti class too (i hope)",
+"fuck periods, headache, stomache or anything that bothers you"
+
+];
+
+/* START FUNCTION */
+
+function start(){
+
+document.getElementById("startBtn").style.display="none";
+
+setInterval(spawnText,700);
+setInterval(spawnHeart,2000);
+setInterval(growFlower,1200);
+
+setTimeout(()=>{
+document.getElementById("final").style.opacity="1";
+},20000);
+
+}
+
+/* FALLING TEXT */
+
+function spawnText(){
+
+let text=document.createElement("div");
+
+text.className="falling";
+
+text.innerText=compliments[Math.floor(Math.random()*compliments.length)];
+
+text.style.left=Math.random()*100+"vw";
+
+text.style.animationDuration=4+Math.random()*3+"s";
+
+document.body.appendChild(text);
+
+setTimeout(()=>text.remove(),7000);
+
+}
+
+/* HEARTS */
+
+function spawnHeart(){
+
+let heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerText="💛";
+
+heart.style.left=Math.random()*100+"vw";
+heart.style.top=Math.random()*80+"vh";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),7000);
+
+}
+
+/* SUNFLOWER GARDEN */
+
+function growFlower(){
+
+let flower=document.createElement("div");
+
+flower.className="flower";
+
+flower.innerText="🌻";
+
+document.getElementById("garden").appendChild(flower);
+
+}
+
+/* BUTTON EVENT */
+
+document.getElementById("startBtn").addEventListener("click",start);
+
+</script>
+
+</body>
+</html>
